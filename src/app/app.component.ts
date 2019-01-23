@@ -37,7 +37,7 @@ export class AppComponent {
   }
 
   onSubmit() {
-    alert(this.myForm.value);
+    alert("Form Submitted !");
   }
 
   addNewD() {

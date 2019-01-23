@@ -1,75 +1,42 @@
-<h2>Nested Form</h2>
-
-<form [formGroup]="myForm" (ngSubmit)="onSubmit(f)" #f="ngForm">
-  <div class="form-group">
-    <label for="a">A :</label>
-    <input type="checkbox" class="checkmark" formControlName="a">
-    <label for="b">B :</label>
-    <input type="number" class="number" formControlName="b">
-    <label for="c">C :</label>
-    <input type="text" class="string" formControlName="c">
+<h2 style="margin-left:10%;">Nested Form</h2>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(f)" #f="ngForm" class="form">
+  <div>
+    <h3><label for="a">A :</label>
+    <input type="checkbox" class="checkmark" formControlName="a"></h3>
+    <h3><label for="b">B :</label>
+    <input type="number" formControlName="b"></h3>
+    <h3><label for="c">C :</label>
+    <input type="text" formControlName="c"  placeholder="C"></h3>
   </div>
-  <label for="d">D :</label>
-    <button style="margin-top:5px; margin-bottom:5px;" type="button" class="btn btn-primary btn-sm" (click)="addNewD()">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add D
-    </button>
+  <h3><label for="d">D :</label><button class="button" type="button" (click)="addNewD()"> Add D </button></h3>
   <div formArrayName="d">
-    <div style="margin-top:5px; margin-bottom:5px;" *ngFor="let D of myForm.get('d').controls; let i=index">
+    <div *ngFor="let D of myForm.get('d').controls; let i=index">
       <fieldset>
-        <legend><h4>D {{i+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger" (click)="deleteD(i)"><span class="glyphicon glyphicon-minus"aria-hidden="true"></span> Remove D</button></h4></legend>
-        <div [formGroupName]="i">
-          <div class="form-inline">
-            <div class="form-group">
-              <label style="margin-right:80px;" class="col-form-label" for="e">E :</label>
-              <input type="text"
-                     class="form-control"
-                     id="city"
-                     placeholder="E"
-                     name="type"
-                     formControlName="e" 
-                     style="margin-right:5px;" 
-                     required>
-              <label for="f">F :</label>
-              <button style="margin-right:5px;"  type="button" class="btn btn-success btn-sm" (click)="addNewF(D.controls.f)">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New F
-              </button>
-            </div>
-          </div>
-        <div formArrayName="f">
-          <div style="margin-top:5px; margin-bottom:5px;" *ngFor="let F of D.get('f').controls; let j=index">
-          <legend><h4>F {{j+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger" (click)="deleteF(D.controls.f, j)">
-                <span class="glyphicon glyphicon-minus"aria-hidden="true"></span> Remove E</button></h4></legend>
+        <h3>D{{i+1}}:<button type="button" class="button" (click)="deleteD(i)"> Remove Me!</button></h3>
+         <div [formGroupName]="i">
+           <h3><label for="e">E :</label><input type="text" placeholder="E" formControlName="e"></h3>
+             <h3><label for="f">F :</label><button  type="button" class="button" (click)="addNewF(D.controls.f)"> Add New F</button></h3>
+          <div formArrayName="f">
+           <div *ngFor="let F of D.get('f').controls; let j=index">
+            <fieldset>
+             <h3>F {{j+1}}:<button type="button" class="button" (click)="deleteF(D.controls.f, j)">
+                 Remove Me!</button></h3>
                   <div [formGroupName]="j">
-                   <div class="form-inline">
-                    <div class="form-group">
                       <label for="g">G :</label>
-                        <button style="margin-right:5px;"  type="button" class="btn btn-success btn-sm" (click)="addNewG(F.controls.g)">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New G
+                        <button type="button" class="button" (click)="addNewG(F.controls.g)"> Add New G
                         </button>
-                      </div>
-                    </div>
                         <div formArrayName="g">
-                        <div style="margin-top:5px; margin-bottom:5px;" *ngFor="let G of F.get('g').controls; let k=index">
-                          <legend><h4>G {{k+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger" (click)="deleteG(F.controls.g, k)">
-                             <span class="glyphicon glyphicon-minus"aria-hidden="true"></span> Remove G
-                          </button></h4></legend>
+                        <div *ngFor="let G of F.get('g').controls; let k=index">
+                          <fieldset>
+                          <h3>G {{k+1}}:<button  type="button" class="button" (click)="deleteG(F.controls.g, k)"> Remove Me!</button></h3>
                           <div [formGroupName]="k">
-                          <div class="form-inline">
-                            <div class="form-group">
                            <label for="h">H :</label>
-                              <button style="margin-right:5px;"  type="button" class="btn btn-success btn-sm" (click)="addNewH(G.controls.h)">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New H
-                        </button>
-                      </div>
-                    </div>
+                           <button type="button" class="button" (click)="addNewH(G.controls.h)"> Add New H</button>
                           <div formArrayName="h">
-                          <div style="margin-top:5px; margin-bottom:5px;" *ngFor="let H of G.get('h').controls; let l=index">
-                          <legend><h4>H {{l+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger" (click)="deleteH(G.controls.h, l)">
-                            <span class="glyphicon glyphicon-minus"aria-hidden="true"></span> Remove H
-                          </button></h4></legend>
+                          <div  *ngFor="let H of G.get('h').controls; let l=index">
+                            <fieldset>
+                          <h3>H {{l+1}}:<button type="button" class="button" (click)="deleteH(G.controls.h, l)">Remove Me!</button></h3>
                           <div [formGroupName]="l">
-                          <div class="form-inline">
-                            <div class="form-group">
                               <label for="i">I :</label>
                               <input type="text" class="string" formControlName="i">
                               <label for="j">J :</label>
@@ -79,26 +46,25 @@
                               <label for="l">L :</label>
                               <input type="text" class="string" formControlName="l">
                             </div>
-                          </div>
+                          </fieldset>
                         </div>
                       </div>
                     </div>
+                  </fieldset>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+          </fieldset>
+        </div>
         </div>
       </div>
       </fieldset>
     </div>
   </div>
-
-  
-  <button type="submit" class="btn btn-success">Submit</button>
-  <button type="button" class="btn btn-basic" >Cancel</button>
+  <button type="submit" class="button">Submit</button>
+  <button type="button" class="button" >Cancel</button>
 </form>
-
+<h2>My Value</h2>
  <pre>{{myForm.value | json}}</pre>
 
 
